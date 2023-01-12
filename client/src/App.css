@@ -52,5 +52,24 @@ body {
 
 /* Interactive App Styling */
 
+.UserApp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+/* Map Container */
+.MapContainer {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+}
+
+#deckgl-wrapper {
+  position: relative;
+}
 
 /*Interactive App Styling End */

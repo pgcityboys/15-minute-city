@@ -8,22 +8,25 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 const API_KEY = 'pk.eyJ1IjoibXJvY2hueSIsImEiOiJjbGJmY2hiamQwNTVoM3ZzMndzNGNodmN4In0.bSbi4473dvEs_RCJYHENZA' //please don't steal, here only for the convenience of grading
 
 type MapData = {coordinates: [number, number], value: number}[]
-const testData: MapData = [{coordinates: [18.493331, 54.560836], value: 1},
-                        {coordinates: [18.464911, 54.465758], value: 0},
-                        {coordinates: [18.57884, 54.43451], value: 0},
-                        {coordinates: [18.657497, 54.400833], value: 0},
-                        {coordinates: [18.620274, 54.380279], value: 0},
-                        {coordinates: [18.635283, 54.353336], value: 0},
+const testData: MapData = [{coordinates: [18.493331, 54.560836], value: 0.4},
+                        {coordinates: [18.464911, 54.465758], value: 0.67},
+                        {coordinates: [18.57884, 54.43451], value: 0.1},
+                        {coordinates: [18.657497, 54.400833], value: 0.5},
+                        {coordinates: [18.620274, 54.380279], value: 0.2},
+                        {coordinates: [18.635283, 54.353336], value: 0.5},
                         ];
 
 const INITIAL_VIEW_STATE = {
-    longitude: 18.493331,
-    latitude: 54.560836,
-    zoom: 9,
+    longitude: 18.620274, 
+    latitude: 54.380279,
+    zoom: 12,
     maxZoom: 16,
     pitch: 0,
     bearing: 0
     };
+
+type Color = [number, number, number, number]
+const COLOR_SCHEME: Color[] = [[254,235,226, 150], [252,197,192, 150], [250,159,181, 150], [247,104,161, 150], [197,27,138, 150], [122,1,119, 150]];
     
 const MAP_STYLE = 'mapbox://styles/mapbox/streets-v12';
 
@@ -48,16 +51,19 @@ export function MapWithHeatmap({
         radiusPixels,
         intensity,
         threshold,
-        aggregation: 'SUM'
+        aggregation: 'MEAN',
+        colorRange: COLOR_SCHEME
         })
     ];
 
 
     return (
-        <div style={{position:'relative', width: '50%', height: '50vh', margin: '2rem'}}>
+        <div className="MapContainer">
+            <div style={{position:'relative', width: '70%', height: '70vh', margin: '2rem'}}>
             <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={layers}>
                 <StaticMap reuseMaps mapStyle={mapStyle} mapboxAccessToken={API_KEY}/>
             </DeckGL>
-        </div> 
+            </div> 
+        </div>
     )
 }

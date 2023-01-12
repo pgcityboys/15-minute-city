@@ -1,5 +1,6 @@
 from flask import Flask, Response, jsonify
 from waitress import serve
+import selector
 
 app = Flask("air_quality_backend")
 

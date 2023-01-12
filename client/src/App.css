@@ -6,7 +6,9 @@
 :root{
   --background-color: #2c3531;
   --green-color: #116466;
+  --greener-green: #46a58a;
   --brown-color: #d9b08c;
+  --browner-color: #a88566;
   --brown-color-light: #ffcb9a;
   --blue-color: #D1e8e2; 
 }
@@ -77,5 +79,10 @@ body {
   position: relative;
 }
 
+.react-select__menu-list{
+  background: #116466;
+}
+
 
 /*Interactive App Styling End */
+

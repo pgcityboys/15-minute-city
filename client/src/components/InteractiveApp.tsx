@@ -41,8 +41,7 @@ export function InteractiveApp(){
 
     const getData = () => {
         fetchHeatmapData(defaultWeights).then((response) => {
-            alert(response);
-            let res = JSON.parse(response) as heatmapData;
+            let res = response as heatmapData;
             setHeatData(res);
         })
     }

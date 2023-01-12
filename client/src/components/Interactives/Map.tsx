@@ -3,6 +3,8 @@ import DeckGL from '@deck.gl/react/typed';
 import {HeatmapLayer} from '@deck.gl/aggregation-layers/typed';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { heatmapData } from "../../types";
+import { useState } from 'react';
+import { Viewport } from '@deck.gl/core/typed';
 
 
 const API_KEY = 'pk.eyJ1IjoibXJvY2hueSIsImEiOiJjbGJmY2hiamQwNTVoM3ZzMndzNGNodmN4In0.bSbi4473dvEs_RCJYHENZA' //please don't steal, here only for the convenience of grading
@@ -39,7 +41,6 @@ export function MapWithHeatmap({
     data = testData
     }){
 
-   
 
     const layers = [
         new HeatmapLayer({
@@ -48,7 +49,7 @@ export function MapWithHeatmap({
         pickable: false,
         getPosition: d => d.coordinates,
         getWeight: d => d.value,
-        radiusPixels,
+        radiusPixels: 200,
         intensity,
         threshold,
         aggregation: 'MEAN',
@@ -56,12 +57,14 @@ export function MapWithHeatmap({
         })
     ];
 
+    let [zoom, setZoom] = useState();
+
 
     return (
         <div className="MapContainer">
             <div style={{position:'relative', width: '70%', height: '70vh', margin: '2rem'}}>
             <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={layers}>
-                <StaticMap reuseMaps mapStyle={mapStyle} mapboxAccessToken={API_KEY}/>
+                <StaticMap reuseMaps={false} mapStyle={mapStyle} mapboxAccessToken={API_KEY} onZoom={(e) => alert("chuj123")}/>
             </DeckGL>
             </div> 
         </div>

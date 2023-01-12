@@ -18,7 +18,6 @@ export function InteractiveApp(){
             { value: 'custom', label: 'Moje Miasto' }
         ]
 
-        let [category, setCategory] = useState(options[0]);
 
         const colourStyles = {
         

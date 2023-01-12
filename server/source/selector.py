@@ -4,8 +4,10 @@ import database
 import os
 import atexit
 import threading
+import json
 
 DB_FILENAME = "city.db"
+RESULTS_FILENAME = "results.json"
 SOURCE_DIR  = os.path.join(os.path.dirname(os.path.realpath(__file__)), '')
 CATEGORIES = ("edukacja", "zdrowie", "rozrywka", "jedzenie", "sport", "kultura", "dzieci", "kawiarnie", "natura", "biznes", "uslugi", "transport_publiczny", "sklepy")
 RADIUS = 1000 # in meters
@@ -260,10 +262,9 @@ def queryPlacesWithinCategories(center, radius):
         "lon" + " > " + str(p4[1])
 
     placesByCategories = {category: [] for category in CATEGORIES}
-
     for category in CATEGORIES:
         selectString = f"SELECT * FROM {category}" + inRectangleCondition
-        
+
         try:
             lock.acquire(True)
             cursor.execute(selectString)
@@ -275,19 +276,27 @@ def queryPlacesWithinCategories(center, radius):
             placeCoords = (row[0], row[1])
             if pointIsInCircle(placeCoords, center, radius):
                 placesByCategories[category].append(row)
-
+        
     return placesByCategories
 
 def getPrecalculatedPoints(wages = {category: 1.0 for category in CATEGORIES}):
-    #exampleCoords = (54.36990426138277, 18.606150765192282)
     results = []
-    for coords in PRECALCULATED_COORDS:
-        placesWithinCategories = queryPlacesWithinCategories(coords, RADIUS)
-        result = 0.0
-        for category, places in placesWithinCategories.items():
-            if len(places) > 0:
-                result += wages[category]
-        results.append({"coordinates": coords[::-1], "value": result})
+    try:
+        with open(SOURCE_DIR + RESULTS_FILENAME, 'r') as savedResults:
+            results = json.load(savedResults)
+    except FileNotFoundError:
+        # calculate results
+        for coords in PRECALCULATED_COORDS:
+            placesWithinCategories = queryPlacesWithinCategories(coords, RADIUS)
+            result = 0.0
+            for category, places in placesWithinCategories.items():
+                if len(places) > 0:
+                    result += wages[category]
+            results.append({"coordinates": coords[::-1], "value": result})
+
+        with open(SOURCE_DIR + RESULTS_FILENAME, 'w') as saveResults:
+            json.dump(results, saveResults)
+
     return results
 
 

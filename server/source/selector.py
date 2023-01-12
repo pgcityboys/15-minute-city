@@ -5,7 +5,7 @@ import os
 import atexit
 
 DB_FILENAME = "city.db"
-SOURCE_DIR  = os.path.dirname(os.path.realpath(__file__)) + "\\"
+SOURCE_DIR  = os.path.join(os.path.dirname(os.path.realpath(__file__)), '')
 CATEGORIES = ("edukacja", "zdrowie", "rozrywka", "jedzenie", "sport", "kultura", "dzieci", "kawiarnie", "natura", "biznes", "uslugi", "transport_publiczny", "sklepy")
 RADIUS = 1000 # in meters
 PRECALCULATED_COORDS = ((54.44856818820764, 18.42538889812534),

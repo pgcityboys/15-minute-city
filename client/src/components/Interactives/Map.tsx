@@ -2,13 +2,13 @@ import StaticMap from 'react-map-gl';
 import DeckGL from '@deck.gl/react/typed';
 import {HeatmapLayer} from '@deck.gl/aggregation-layers/typed';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
+import { heatmapData } from "../../types";
 
 
 const API_KEY = 'pk.eyJ1IjoibXJvY2hueSIsImEiOiJjbGJmY2hiamQwNTVoM3ZzMndzNGNodmN4In0.bSbi4473dvEs_RCJYHENZA' //please don't steal, here only for the convenience of grading
 
-type MapData = {coordinates: [number, number], value: number}[]
-const testData: MapData = [{coordinates: [18.493331, 54.560836], value: 0.4},
+
+const testData: heatmapData = [{coordinates: [18.493331, 54.560836], value: 0.4},
                         {coordinates: [18.464911, 54.465758], value: 0.67},
                         {coordinates: [18.57884, 54.43451], value: 0.1},
                         {coordinates: [18.657497, 54.400833], value: 0.5},

@@ -1,7 +1,10 @@
 from flask import Flask, Response, jsonify
+from flask_cors import CORS
 from waitress import serve
+import selector
 
 app = Flask("air_quality_backend")
+CORS(app)
 
 
 @app.route("/")
@@ -23,9 +26,10 @@ def get_location_data(lat, lon):
 
 @app.route('/api/all', methods=['GET'])
 def get_all_data():
-    response = jsonify("all")
+    data = selector.getPrecalculatedPoints()
+    response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')
-
+    
     return response
 
 

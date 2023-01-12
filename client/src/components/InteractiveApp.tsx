@@ -22,13 +22,16 @@ export function InteractiveApp(){
 
         const colourStyles = {
         
-            option: (styles, { data, isDisabled, isFocused, isSelected }, base) => {
+            option: (styles, { data, isDisabled, isFocused, isSelected }) => {
               // const color = chroma(data.color);
               console.log({ data, isDisabled, isFocused, isSelected });
               return {
                 ...styles,
-                backgroundColor: isFocused ? " #46a58a" : "#116466",
-                color: "#333333"
+                color: "#333333",
+                "&:hover": {
+                    // Overwrittes the different states of border
+                    backgroundColor: isSelected ? "#a88566" : "#46a58a"},
+                 backgroundColor: isSelected ? "#a88566" : "#116466"
               };
             },
             control: (base, state) => ({
@@ -45,7 +48,6 @@ export function InteractiveApp(){
           };
     
 
-    let [category, setCategory] = useState(options[0]);
     let [heatData, setHeatData] = useState([]);
 
       useEffect(() => {

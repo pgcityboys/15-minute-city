@@ -21,7 +21,7 @@ const testData: heatmapData = [{coordinates: [18.493331, 54.560836], value: 0.4}
 const INITIAL_VIEW_STATE = {
     longitude: 18.620274, 
     latitude: 54.380279,
-    zoom: 12,
+    zoom: 11.35,
     maxZoom: 16,
     pitch: 0,
     bearing: 0
@@ -49,15 +49,15 @@ export function MapWithHeatmap({
         pickable: false,
         getPosition: d => d.coordinates,
         getWeight: d => d.value,
-        radiusPixels: 200,
+        radiusPixels: radiusPixels,
         intensity,
         threshold,
         aggregation: 'MEAN',
-        colorRange: COLOR_SCHEME
+        colorRange: COLOR_SCHEME,
+        debounceTimeout: 200000
         })
     ];
 
-    let [zoom, setZoom] = useState();
 
 
     return (

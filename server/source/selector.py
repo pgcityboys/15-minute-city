@@ -193,7 +193,10 @@ lock = threading.Lock()
 
 
 def beforeExit():
-    database.close(cursor, db)
+    try:
+        database.close(cursor, db)
+    except sqlite3.ProgrammingError:
+        pass
 
 atexit.register(beforeExit)
 
@@ -300,6 +303,28 @@ def getPrecalculatedPoints(wages = {category: 1.0 for category in CATEGORIES}):
     return results
 
 
+
+def getPlacesAroundLocation(wages = {category: 1.0 for category in CATEGORIES}):
+    results = []
+    try:
+        with open(SOURCE_DIR + RESULTS_FILENAME, 'r') as savedResults:
+            results = json.load(savedResults)
+    except FileNotFoundError:
+        # calculate results
+        for coords in PRECALCULATED_COORDS:
+            placesWithinCategories = queryPlacesWithinCategories(coords, RADIUS)
+            result = 0.0
+            for category, places in placesWithinCategories.items():
+                if len(places) > 0:
+                    result += wages[category]
+            results.append({"coordinates": coords[::-1], "value": result})
+
+        with open(SOURCE_DIR + RESULTS_FILENAME, 'w') as saveResults:
+            json.dump(results, saveResults)
+
+    return results
+
+
 if __name__ == "__main__":
     # DIRTY TESTING
     # print(getDistanceBetweenTwoPoints((54.370892, 18.6132158), (54.3893330823781, 18.609979311308994)))
@@ -307,8 +332,9 @@ if __name__ == "__main__":
     # res = cursor.execute("SELECT name FROM sqlite_master")
     # print(cursor.fetchall())
 
-    # queryPlaces((54.39014837271083, 18.52922941548349))
-
-    print(getPrecalculatedPoints())
+    x = queryPlacesWithinCategories((54.39014837271083, 18.52922941548349), 1000)
+    print(x)
+    
+    #print(getPrecalculatedPoints())
 
     database.close(cursor, db)

@@ -3,6 +3,7 @@ import sqlite3
 import database
 import os
 import atexit
+import threading
 
 DB_FILENAME = "city.db"
 SOURCE_DIR  = os.path.join(os.path.dirname(os.path.realpath(__file__)), '')
@@ -186,6 +187,7 @@ PRECALCULATED_COORDS = ((54.44856818820764, 18.42538889812534),
 
 db = database.connect(SOURCE_DIR + DB_FILENAME)
 cursor = db.cursor() 
+lock = threading.Lock()
 
 
 def beforeExit():
@@ -262,9 +264,13 @@ def queryPlacesWithinCategories(center, radius):
     for category in CATEGORIES:
         selectString = f"SELECT * FROM {category}" + inRectangleCondition
         
-        cursor.execute(selectString)
-        rows = cursor.fetchall()
-
+        try:
+            lock.acquire(True)
+            cursor.execute(selectString)
+            rows = cursor.fetchall()
+        finally:
+            lock.release()
+    
         for row in rows:
             placeCoords = (row[0], row[1])
             if pointIsInCircle(placeCoords, center, radius):

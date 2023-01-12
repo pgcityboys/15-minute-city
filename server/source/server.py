@@ -1,8 +1,10 @@
 from flask import Flask, Response, jsonify
+from flask_cors import CORS
 from waitress import serve
 import selector
 
 app = Flask("air_quality_backend")
+CORS(app)
 
 
 @app.route("/")

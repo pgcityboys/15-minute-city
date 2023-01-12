@@ -3,8 +3,7 @@ import DeckGL from '@deck.gl/react/typed';
 import {HeatmapLayer} from '@deck.gl/aggregation-layers/typed';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { heatmapData } from "../../types";
-import { useState } from 'react';
-import { Viewport } from '@deck.gl/core/typed';
+
 
 
 const API_KEY = 'pk.eyJ1IjoibXJvY2hueSIsImEiOiJjbGJmY2hiamQwNTVoM3ZzMndzNGNodmN4In0.bSbi4473dvEs_RCJYHENZA' //please don't steal, here only for the convenience of grading

@@ -3,7 +3,8 @@ import { MapWithHeatmap } from "./Interactives/Map";
 import { useState, useEffect } from "react";
 import { fetchHeatmapData } from "../api/api";
 import Select from "react-select";
-import { heatmapData, weightData } from "../types";
+import { heatmapData, weightData, defaultWeights } from "../types";
+import { SliderSet } from "./Interactives/SliderSet";
 
 
 export function InteractiveApp(){
@@ -42,21 +43,7 @@ export function InteractiveApp(){
                     borderColor: "#a88566"}
               })
           };
-    const defaultWeights: weightData = {
-        "edukacja": 1,
-        "zdrowie": 1, 
-        "rozrywka": 1, 
-        "jedzenie": 1, 
-        "sport": 1, 
-        "kultura": 1, 
-        "dzieci": 1,
-        "kawiarnie": 1, 
-        "natura": 1, 
-        "biznes": 1, 
-        "uslugi": 1, 
-        "transport_publiczny": 1,
-        "sklepy": 1
-    }
+    
 
     let [category, setCategory] = useState(options[0]);
     let [heatData, setHeatData] = useState([]);
@@ -92,7 +79,7 @@ export function InteractiveApp(){
             options={options} 
             color={"#116466"}
             data={heatData}/>
-                
+            <SliderSet />
             </div>
         </div>
     )

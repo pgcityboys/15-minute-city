@@ -1,4 +1,7 @@
+
 import { heatmapData, weightData } from "../types";
+
+const API_URL = 'http://localhost:3001/api/all';
 
 const testData: heatmapData = [{coordinates: [18.493331, 54.560836], value: 0.4},
                         {coordinates: [18.464911, 54.465758], value: 0.67},
@@ -8,7 +11,16 @@ const testData: heatmapData = [{coordinates: [18.493331, 54.560836], value: 0.4}
                         {coordinates: [18.635283, 54.353336], value: 200},
                         ];
 
-export function fetchHeatmapData(weights: weightData): heatmapData {
-    alert(JSON.stringify(weights))
-    return testData;
+export async function fetchHeatmapData(weights: weightData): Promise<string> {
+    let response = await fetch(new URL(API_URL), {
+        method: 'POST',
+        body: JSON.stringify(weights)
+    }
+    );
+    if(!response.ok){
+        throw new Error("Error while fetching data drom the API")
+    }
+
+    let result = response.json();
+    return result;
 }

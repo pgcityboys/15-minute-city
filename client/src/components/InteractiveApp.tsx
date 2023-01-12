@@ -3,7 +3,7 @@ import { MapWithHeatmap } from "./Interactives/Map";
 import { useState, useEffect } from "react";
 import { fetchHeatmapData } from "../api/api";
 import Select from "react-select";
-import { weightData } from "../types";
+import { heatmapData, weightData } from "../types";
 
 
 export function InteractiveApp(){
@@ -36,9 +36,16 @@ export function InteractiveApp(){
     let [heatData, setHeatData] = useState([]);
 
       useEffect(() => {
-        setHeatData(fetchHeatmapData(defaultWeights))
+        getData();
       }, [category]);
-    
+
+    const getData = () => {
+        fetchHeatmapData(defaultWeights).then((response) => {
+            alert(response);
+            let res = JSON.parse(response) as heatmapData;
+            setHeatData(res);
+        })
+    }
 
     return (
         <div className="UserApp">
@@ -49,8 +56,10 @@ export function InteractiveApp(){
             onChange={setCategory}
             options={options} 
             color={"#116466"}/>
-
-            <MapWithHeatmap data={heatData}/>
+            <div className="MapPart">
+                <MapWithHeatmap data={heatData}/>
+                
+            </div>
         </div>
     )
 }

@@ -59,10 +59,15 @@ body {
   flex-direction: column;
 }
 
+.MapPart {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
 
 /* Map Container */
 .MapContainer {
-  width: 100vw;
+  width: 80vw;
   height: 50vh;
   display: flex;
   justify-content: center;

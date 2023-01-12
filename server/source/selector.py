@@ -304,25 +304,13 @@ def getPrecalculatedPoints(wages = {category: 1.0 for category in CATEGORIES}):
 
 
 
-def getPlacesAroundLocation(wages = {category: 1.0 for category in CATEGORIES}):
-    results = []
-    try:
-        with open(SOURCE_DIR + RESULTS_FILENAME, 'r') as savedResults:
-            results = json.load(savedResults)
-    except FileNotFoundError:
-        # calculate results
-        for coords in PRECALCULATED_COORDS:
-            placesWithinCategories = queryPlacesWithinCategories(coords, RADIUS)
-            result = 0.0
-            for category, places in placesWithinCategories.items():
-                if len(places) > 0:
-                    result += wages[category]
-            results.append({"coordinates": coords[::-1], "value": result})
-
-        with open(SOURCE_DIR + RESULTS_FILENAME, 'w') as saveResults:
-            json.dump(results, saveResults)
-
-    return results
+def getPlacesAroundLocation(coords):
+    placesAroundLocation = queryPlacesWithinCategories(coords, RADIUS)
+    result = {
+            "coordinates": coords, 
+            "places": placesAroundLocation
+             }
+    return result
 
 
 if __name__ == "__main__":
@@ -332,9 +320,12 @@ if __name__ == "__main__":
     # res = cursor.execute("SELECT name FROM sqlite_master")
     # print(cursor.fetchall())
 
-    x = queryPlacesWithinCategories((54.39014837271083, 18.52922941548349), 1000)
-    print(x)
+    # x = queryPlacesWithinCategories((54.39014837271083, 18.52922941548349), 1000)
+    # print(x)
     
-    #print(getPrecalculatedPoints())
+    # print(getPrecalculatedPoints())
+
+    y = getPlacesAroundLocation((54.39014837271083, 18.52922941548349))
+    print(y)
 
     database.close(cursor, db)

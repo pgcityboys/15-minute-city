@@ -28,10 +28,12 @@ def get_location_data(lat, lon):
 
 @app.route('/api/all', methods=['GET', 'POST'])
 def get_all_data():
-    wages = {}
+    data = None
     if (request.data):
         wages = json.loads(request.data.decode("utf-8"))
-    data = selector.getPrecalculatedPoints(wages)
+        data = selector.getPrecalculatedPoints(wages)
+    else:
+        data = selector.getPrecalculatedPoints()
     response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     

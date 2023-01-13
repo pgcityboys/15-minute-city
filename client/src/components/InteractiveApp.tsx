@@ -5,6 +5,7 @@ import { fetchHeatmapData, fetchTableData, getCoords, mockData } from "../api/ap
 import Select from "react-select";
 import { heatmapData, weightData, defaultWeights, defaultCategories } from "../types";
 import { SliderSet } from "./Interactives/SliderSet";
+import React from 'react'
 
 import {Table} from "antd";
 
@@ -65,9 +66,7 @@ export function InteractiveApp(){
 
    const getTableData = () => {
     fetchTableData(defaultLat,defaultLon).then((response) => {
-        console.log("res" + response);
         setTableData(response as tableData);
-        console.log(tableData);
     })
 }
         
@@ -112,16 +111,16 @@ export function InteractiveApp(){
 
     for (let index =0; index < 13; index++){  
         let nestedDataSource = [];
-        console.log(tableData);
         let places = tableData.places[categories[index]]
         for(let i = 0; i < places.length; i++)
         {
+            let link = places[i][4];
             let name = places[i][3];
             let type = places[i][2];
             let distance = places[i][5];
             nestedDataSource.push({
                 key: i,
-                name: name,
+                name: name,    
                 type: type,
                 distance: distance
             })
@@ -135,8 +134,6 @@ export function InteractiveApp(){
     }
 
     let[category, setCategory] = useState(options[0]);
-
-    
 
     let [heatData, setHeatData] = useState([]);
 
@@ -170,7 +167,7 @@ export function InteractiveApp(){
     }, [])
 
     
-
+    const formRef = React.useRef()
     return (
         <div className="UserApp">
             <h1>{category.label}</h1>
@@ -184,7 +181,6 @@ export function InteractiveApp(){
             styles={colourStyles}
             value={category}
             />
-
             
             <div className="MapPart">-
             <MapWithHeatmap
@@ -193,6 +189,27 @@ export function InteractiveApp(){
             data={heatData}/>
             <SliderSet onValuesModified={handleSliderChange} onFormSubmitted={getData} categoryData={defaultCategories[category.value]}/>
             </div>
+
+            <form
+            ref={formRef}
+            onSubmit={(e: React.SyntheticEvent) => {
+                e.preventDefault();
+                const target = e.target as typeof e.target & {
+                    query: { value: string };
+                };
+                const query = target.query.value;
+                console.log(query);
+            }}
+            >
+            <div id="query">
+                <label>
+                Lokalizacja: 
+                <input name="query" />
+                </label>
+                <input type="submit" value="Wyślij" />
+            </div>
+            </form>
+
             <div id="tableDiv">
             <Table
                 pagination={false}

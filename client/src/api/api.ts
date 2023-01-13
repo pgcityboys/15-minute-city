@@ -140,7 +140,6 @@ export async function fetchTableData(lat: number, lon: number): Promise<string> 
 export async function getCoords(query: string = "kochanowskiego%205"){
     const queryString = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + query +".json?proximity=ip&access_token=" + API_KEY;
     queryString.replace(/\s/g, '%20');
-    alert(queryString)
     let response = await fetch( new URL(queryString), {
         method: 'GET'
     })

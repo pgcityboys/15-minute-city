@@ -159,15 +159,14 @@ export function InteractiveApp(){
     const defaultCoordinates = [defaultLon, defaultLat]
     let [coordinates, setCoordinates] = useState(defaultCoordinates)
     useEffect(() => {
-        
-    }, [])
+        getTableData()
+    }, [coordinates])
 
     const handleCoords = (query: string = "sobieskiego13") => {
         getCoords(query).then((response) => {
             let coordinates = response.features[0].center;
             console.log(coordinates)
             setCoordinates(coordinates)
-            getTableData()
         })
     }
 
@@ -211,7 +210,7 @@ export function InteractiveApp(){
             <div id="query">
                 
                 <label>
-                Lokalizacja: 
+                Wpisz adres:
                 <input name="query" />
                 </label>
                 <input type="submit" value="Wyślij" />

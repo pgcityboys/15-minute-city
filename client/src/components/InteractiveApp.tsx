@@ -159,12 +159,16 @@ export function InteractiveApp(){
     const defaultCoordinates = [defaultLon, defaultLat]
     let [coordinates, setCoordinates] = useState(defaultCoordinates)
     useEffect(() => {
-        getCoords().then((response) => {
-            alert(JSON.stringify(response))
-            let coordinates = response.features[0].properties.center;
-            console.log(coordinates)
-        })
+        
     }, [])
+
+    const handleCoords = (query: string = "sobieskiego13") => {
+        getCoords(query).then((response) => {
+            let coordinates = response.features[0].center;
+            console.log(coordinates)
+            setCoordinates(coordinates)
+        })
+    }
 
     
     const formRef = React.useRef()
@@ -190,6 +194,7 @@ export function InteractiveApp(){
             <SliderSet onValuesModified={handleSliderChange} onFormSubmitted={getData} categoryData={defaultCategories[category.value]}/>
             </div>
 
+            <h2>Lokalizacja: {coordinates[0]}, {coordinates[1]}</h2>
             <form
             ref={formRef}
             onSubmit={(e: React.SyntheticEvent) => {
@@ -199,9 +204,11 @@ export function InteractiveApp(){
                 };
                 const query = target.query.value;
                 console.log(query);
+                handleCoords(query);
             }}
             >
             <div id="query">
+                
                 <label>
                 Lokalizacja: 
                 <input name="query" />

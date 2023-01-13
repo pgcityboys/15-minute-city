@@ -62,12 +62,12 @@ export function InteractiveApp(){
     const defaultLat = 54.4;
     const defaultLon = 18.6;
 
-   let tableData;
+   let [tableData, setTableData] = useState(mockData)
 
    const getTableData = () => {
     fetchTableData(defaultLat,defaultLon).then((response) => {
         console.log("res" + response);
-        tableData = response as tableData;
+        setTableData(response as tableData);
         console.log(tableData);
     })
 }

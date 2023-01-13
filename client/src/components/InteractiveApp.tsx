@@ -66,9 +66,7 @@ export function InteractiveApp(){
 
    const getTableData = () => {
     fetchTableData(defaultLat,defaultLon).then((response) => {
-        console.log("res" + response);
         setTableData(response as tableData);
-        console.log(tableData);
     })
 }
         
@@ -113,16 +111,16 @@ export function InteractiveApp(){
 
     for (let index =0; index < 13; index++){  
         let nestedDataSource = [];
-        console.log(tableData);
         let places = tableData.places[categories[index]]
         for(let i = 0; i < places.length; i++)
         {
+            let link = places[i][4];
             let name = places[i][3];
             let type = places[i][2];
             let distance = places[i][5];
             nestedDataSource.push({
                 key: i,
-                name: name,
+                name: name,    
                 type: type,
                 distance: distance
             })
@@ -136,8 +134,6 @@ export function InteractiveApp(){
     }
 
     let[category, setCategory] = useState(options[0]);
-
-    
 
     let [heatData, setHeatData] = useState([]);
 

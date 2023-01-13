@@ -50,7 +50,7 @@ export function InteractiveApp(){
 
       useEffect(() => {
         getData();
-      }, [category]);
+      }, []);
 
 
     const getData = (weights: weightData) => {
@@ -61,7 +61,9 @@ export function InteractiveApp(){
     }
 
     const handleSliderChange = () => {
-        setCategory(options[4]);
+        if(category != options[4]){
+            setCategory(options[4]);
+        }
     }
 
     return (

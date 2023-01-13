@@ -5,6 +5,7 @@ import { fetchHeatmapData, fetchTableData, getCoords, mockData } from "../api/ap
 import Select from "react-select";
 import { heatmapData, weightData, defaultWeights, defaultCategories } from "../types";
 import { SliderSet } from "./Interactives/SliderSet";
+import React from 'react'
 
 import {Table} from "antd";
 
@@ -167,7 +168,7 @@ export function InteractiveApp(){
     }, [])
 
     
-
+    const formRef = React.useRef()
     return (
         <div className="UserApp">
             <h1>{category.label}</h1>
@@ -181,7 +182,6 @@ export function InteractiveApp(){
             styles={colourStyles}
             value={category}
             />
-
             
             <div className="MapPart">-
             <MapWithHeatmap
@@ -190,6 +190,27 @@ export function InteractiveApp(){
             data={heatData}/>
             <SliderSet onValuesModified={handleSliderChange} onFormSubmitted={getData} categoryData={defaultCategories[category.value]}/>
             </div>
+
+            <form
+            ref={formRef}
+            onSubmit={(e: React.SyntheticEvent) => {
+                e.preventDefault();
+                const target = e.target as typeof e.target & {
+                    query: { value: string };
+                };
+                const query = target.query.value;
+                console.log(query);
+            }}
+            >
+            <div id="query">
+                <label>
+                Lokalizacja: 
+                <input name="query" />
+                </label>
+                <input type="submit" value="Wyślij" />
+            </div>
+            </form>
+
             <div id="tableDiv">
             <Table
                 pagination={false}

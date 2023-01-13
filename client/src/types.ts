@@ -12,9 +12,40 @@ export type weightData = {
     "uslugi": number, 
     "transport": number,
     "sklepy": number
-}
+};
 
 export type heatmapData = {coordinates: [number, number], value: number}[];
+
+
+
+
+export type place = [
+    lat: number,
+    lon: number,
+    type: string,
+    title: string,
+    link: string,
+    distance: number
+]
+
+
+
+export type places = {
+    "biznes": Array<place>,
+    "dzieci": Array<place>,
+    "edukacja": Array<place>,
+    "jedzenie": Array<place>,
+    "kawiarnie": Array<place>,
+    "kultura": Array<place>,
+    "natura": Array<place>,
+    "rozrywka": Array<place>,
+    "sklepy": Array<place>,
+    "sport": Array<place>,
+    "transport": Array<place>,
+    "uslugi": Array<place>,
+    "zdrowie": Array<place>
+}
+
 
 export const defaultWeights: weightData = {
     "edukacja": 1,
@@ -56,3 +87,7 @@ export const defaultCategories = {
 }
 
 export const weightCategories = ['zdrowie', 'edukacja', 'rozrywka', 'jedzenie', 'sport', 'kultura', 'dzieci', 'kawiarnie', 'natura', 'biznes', 'uslugi', 'transport', 'sklepy']
+export type tableData = {
+    coordinates: [number, number],
+    places: places
+}

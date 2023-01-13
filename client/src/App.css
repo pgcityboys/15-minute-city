@@ -22,6 +22,8 @@ body {
 
 /* Banner Styling */
 
+
+
 .Banner {
   height: 100vh;
   width: 100%;
@@ -120,6 +122,14 @@ body {
   border-radius: 1rem;
   width: 2rem
 }
+#tableDiv{
+  width: 70%;
+}
+
+
+
+
+
 
 /*Interactive App Styling End */
 

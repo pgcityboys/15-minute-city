@@ -159,10 +159,13 @@ export function InteractiveApp(){
             setCategory(options[4]);
         }
     }
-
+    const defaultCoordinates = [defaultLon, defaultLat]
+    let [coordinates, setCoordinates] = useState(defaultCoordinates)
     useEffect(() => {
         getCoords().then((response) => {
             alert(JSON.stringify(response))
+            let coordinates = response.features[0].properties.center;
+            console.log(coordinates)
         })
     }, [])
 

@@ -8,18 +8,25 @@ type props = {
     categoryData: weightData
 }
 
-export function SliderSet(props: props) {
+export function SliderSet({onValuesModified, onFormSubmitted, categoryData} : props) {
 
     let [weight, setWeight] = useState(defaultWeights);
 
     const handleSubmit = () => {
-        props.onFormSubmitted(weight);
+        onFormSubmitted(weight);
     }
 
     useEffect(() => {
         console.log(weight);
-        props.onValuesModified();
+        onValuesModified();
     }, [weight])
+
+    useEffect(() => {
+        if(categoryData!=undefined){
+            setWeight(categoryData)
+        }
+        
+    }, [categoryData])
 
     return (
         <div className="Sliders">

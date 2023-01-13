@@ -32,4 +32,27 @@ export const defaultWeights: weightData = {
     "sklepy": 1
 }
 
+const greenWeights: weightData = {
+    "edukacja": 7,
+    "zdrowie": 5, 
+    "rozrywka": 4, 
+    "jedzenie": 3, 
+    "sport": 9, 
+    "kultura": 7, 
+    "dzieci": 8,
+    "kawiarnie": 2, 
+    "natura": 10, 
+    "biznes": 2, 
+    "uslugi": 5, 
+    "transport": 8,
+    "sklepy": 4
+}
+
+export const defaultCategories = {
+    'green': greenWeights,
+    'innovative': defaultWeights,
+    'together': defaultWeights,
+    'accessible': defaultWeights
+}
+
 export const weightCategories = ['zdrowie', 'edukacja', 'rozrywka', 'jedzenie', 'sport', 'kultura', 'dzieci', 'kawiarnie', 'natura', 'biznes', 'uslugi', 'transport', 'sklepy']

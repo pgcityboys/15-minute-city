@@ -3,7 +3,7 @@ import { MapWithHeatmap } from "./Interactives/Map";
 import { useState, useEffect } from "react";
 import { fetchHeatmapData } from "../api/api";
 import Select from "react-select";
-import { heatmapData, weightData, defaultWeights } from "../types";
+import { heatmapData, weightData, defaultWeights, defaultCategories } from "../types";
 import { SliderSet } from "./Interactives/SliderSet";
 
 
@@ -61,7 +61,7 @@ export function InteractiveApp(){
     }
 
     const handleSliderChange = () => {
-        if(category != options[4]){
+        if(category !== options[4]){
             setCategory(options[4]);
         }
     }
@@ -86,7 +86,7 @@ export function InteractiveApp(){
             options={options} 
             color={"#116466"}
             data={heatData}/>
-            <SliderSet onValuesModified={handleSliderChange} onFormSubmitted={getData} />
+            <SliderSet onValuesModified={handleSliderChange} onFormSubmitted={getData} categoryData={defaultCategories[category.value]}/>
             </div>
         </div>
     )

@@ -64,7 +64,7 @@ export function MapWithHeatmap({
         <div className="MapContainer">
             <div style={{position:'relative', width: '70%', height: '70vh', margin: '2rem'}}>
             <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={layers}>
-                <StaticMap reuseMaps={false} mapStyle={mapStyle} mapboxAccessToken={API_KEY} onZoom={(e) => alert("chuj123")}/>
+                <StaticMap reuseMaps={false} mapStyle={mapStyle} mapboxAccessToken={API_KEY}/>
             </DeckGL>
             </div> 
         </div>

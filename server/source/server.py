@@ -19,7 +19,8 @@ def page_not_found(error):
 
 @app.route('/api/<lat>:<lon>', methods=['GET'])
 def get_location_data(lat, lon):
-    response = jsonify("test", lat, lon)
+    data = selector.getPlacesAroundLocation((float(lat), float(lon)))
+    response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response

@@ -25,5 +25,5 @@ By default server runs in production mode. If something wrong happens, you can t
 - Returns: JSON with results for each location in pre-defined grid e.g. `[{"coordinates": "[18.6163277, 54.3716751]", "value": 21.3}...]` 
 ### Retrieving data about specific location
 - URL: /api/&lt;lat&gt;:&lt;lon&gt;
-- Body: JSON with category wages `{"wages": ..., "coordinates": {...}}`
-- Returns: JSON with results for this location with places e.g. `[{result: {"coordinates": "[18.6163277, 54.3716751]", "value": 21.3}}, places: {...}]` 
+- Body: Empty
+- Returns: JSON with results for this location with places e.g. `{"coordinates": "[18.6163277, 54.3716751]", places: {...}}` 

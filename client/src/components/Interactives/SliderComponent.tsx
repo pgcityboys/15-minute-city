@@ -20,6 +20,7 @@ return(
                 thumbClassName="example-thumb"
                 trackClassName="example-track"
                 renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+                renderTrack={(props, state) => <div {...props} />}
                 onChange={(value, index) => props.setter({
                     ...props.prev,
                     [props.name]: value

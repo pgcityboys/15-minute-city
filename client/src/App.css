@@ -93,9 +93,9 @@ body {
   grid-template-columns: 10rem 10rem;
 }
 
-.example-track.example-track-0 {
-  color: blue;
-  background: blue;
+.example-track {
+  background: var(--blue-color);
+  height: 5px
 }
 
 .example-thumb-0  {

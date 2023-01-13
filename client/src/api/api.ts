@@ -138,7 +138,7 @@ export async function fetchTableData(lat: number, lon: number): Promise<string> 
 }
 
 export async function getCoords(query: string = "kochanowskiego%205"){
-    const queryString = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + query +".json?access_token=" + API_KEY;
+    const queryString = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + query +".json?proximity=ip&access_token=" + API_KEY;
     queryString.replace(/\s/g, '%20');
     alert(queryString)
     let response = await fetch( new URL(queryString), {
@@ -148,6 +148,7 @@ export async function getCoords(query: string = "kochanowskiego%205"){
         throw new Error("Error while fetching data drom the API")
     }
     let result = response.json();
+    console.log(result)
     return result;
 }
 

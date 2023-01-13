@@ -9,16 +9,16 @@ type props = {
 export function SliderComponent(props: props) {
 
 return(
-    <div>
-            <h1>{props.name}</h1>
+    <div className="SliderWrapper">
+            <h4>{props.name.toLocaleUpperCase()}</h4>
             <ReactSlider
                 className="horizontal-slider"
                 marks
                 markClassName="slider-mark"
                 min={0}
                 max={10}
-                thumbClassName="slider-thumb"
-                trackClassName="slider-track"
+                thumbClassName="example-thumb"
+                trackClassName="example-track"
                 renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
                 onChange={(value, index) => props.setter({
                     ...props.prev,

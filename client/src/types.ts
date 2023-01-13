@@ -10,7 +10,7 @@ export type weightData = {
     "natura": number, 
     "biznes": number, 
     "uslugi": number, 
-    "transport_publiczny": number,
+    "transport": number,
     "sklepy": number
 }
 
@@ -28,8 +28,8 @@ export const defaultWeights: weightData = {
     "natura": 1, 
     "biznes": 1, 
     "uslugi": 1, 
-    "transport_publiczny": 1,
+    "transport": 1,
     "sklepy": 1
 }
 
-export const weightCategories = ['zdrowie', 'edukacja', 'rozrywka', 'jedzenie', 'sport', 'kultura', 'dzieci', 'kawiarnie', 'natura', 'biznes', 'uslugi', 'transport_publiczny', 'sklepy']
+export const weightCategories = ['zdrowie', 'edukacja', 'rozrywka', 'jedzenie', 'sport', 'kultura', 'dzieci', 'kawiarnie', 'natura', 'biznes', 'uslugi', 'transport', 'sklepy']

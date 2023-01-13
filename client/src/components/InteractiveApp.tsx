@@ -52,11 +52,16 @@ export function InteractiveApp(){
         getData();
       }, [category]);
 
+
     const getData = () => {
         fetchHeatmapData(defaultWeights).then((response) => {
             let res = response as heatmapData;
             setHeatData(res);
         })
+    }
+
+    const handleSliderChange = () => {
+        setCategory(options[4]);
     }
 
     return (
@@ -70,7 +75,7 @@ export function InteractiveApp(){
             onChange={setCategory}
             options={options}     
             styles={colourStyles}
-
+            value={category}
             />
 
             
@@ -79,7 +84,7 @@ export function InteractiveApp(){
             options={options} 
             color={"#116466"}
             data={heatData}/>
-            <SliderSet />
+            <SliderSet onValuesModified={handleSliderChange}/>
             </div>
         </div>
     )

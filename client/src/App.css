@@ -75,6 +75,7 @@ body {
   height: 50vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #deckgl-wrapper {
@@ -86,25 +87,39 @@ body {
 }
 
 .Sliders {
-  width: 15%;
+  max-width: 15%;
   height: 100%;
-  background-color: var(--blue-color);
+  display: grid;
+  grid-template-columns: 10rem 10rem;
 }
 
-.slider-mark {
-  color: var(--background-color);
+.example-track.example-track-0 {
+  color: blue;
+  background: blue;
 }
 
-.slider-thumb {
-  color: black;
-  background-color: var(--greener-green);
+.example-thumb-0  {
+  color: var(--blue-color);
+}
+
+.horizontal-slider {
+  z-index: 100;
+}
+
+.SliderWrapper {
+  padding: 2rem;
   border-radius: 1rem;
+  border: 2px solid black;
+  background-color: var(--greener-green);
+  align-content: center;
 }
 
-.slider-track {
-  background-color: var(--browner-color);
+.example-thumb.example-thumb-0 {
+  background: var(--background-color);
+  padding: 0.2rem;
+  border-radius: 1rem;
+  width: 2rem
 }
-
 
 /*Interactive App Styling End */
 

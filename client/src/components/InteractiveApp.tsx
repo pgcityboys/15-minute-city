@@ -64,7 +64,7 @@ export function InteractiveApp(){
      const columns = [
         {
             title: "Kategoria",
-            dataIndex: "category2",
+            dataIndex: "category",
         },
         {
             title: "Ilość",
@@ -111,7 +111,7 @@ export function InteractiveApp(){
         }
         dataSource.push({
             key: index,
-            category2: categories[index],
+            category: categories[index],
             count: places.length,
             nestedData: nestedDataSource
         })

@@ -65,7 +65,7 @@ export function InteractiveApp(){
    let [tableData, setTableData] = useState(mockData)
 
    const getTableData = () => {
-    fetchTableData(defaultLat,defaultLon).then((response) => {
+    fetchTableData(coordinates[1], coordinates[0]).then((response) => {
         setTableData(response as tableData);
     })
 }
@@ -167,6 +167,7 @@ export function InteractiveApp(){
             let coordinates = response.features[0].center;
             console.log(coordinates)
             setCoordinates(coordinates)
+            getTableData()
         })
     }
 

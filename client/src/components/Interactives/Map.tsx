@@ -1,3 +1,4 @@
+//@ts-nocheck
 import StaticMap from 'react-map-gl';
 import DeckGL from '@deck.gl/react/typed';
 import {HeatmapLayer} from '@deck.gl/aggregation-layers/typed';
@@ -6,7 +7,7 @@ import { heatmapData } from "../../types";
 
 
 
-const API_KEY = 'pk.eyJ1IjoibXJvY2hueSIsImEiOiJjbGJmY2hiamQwNTVoM3ZzMndzNGNodmN4In0.bSbi4473dvEs_RCJYHENZA' //please don't steal, here only for the convenience of grading
+export const API_KEY = 'pk.eyJ1IjoibXJvY2hueSIsImEiOiJjbGJmY2hiamQwNTVoM3ZzMndzNGNodmN4In0.bSbi4473dvEs_RCJYHENZA' //please don't steal, here only for the convenience of grading
 
 
 const testData: heatmapData = [{coordinates: [18.493331, 54.560836], value: 0.4},
@@ -54,7 +55,10 @@ export function MapWithHeatmap({
         threshold,
         aggregation: 'MEAN',
         colorRange: COLOR_SCHEME,
-        debounceTimeout: 2000000
+        debounceTimeout: 2000000,
+        onClick(pickingInfo, event) {
+            alert('fbdhub')
+        },
         })
     ];
 

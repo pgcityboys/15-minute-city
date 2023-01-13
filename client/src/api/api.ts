@@ -1,4 +1,5 @@
 
+import { API_KEY } from "../components/Interactives/Map";
 import { heatmapData, tableData, weightData } from "../types";
 
 
@@ -134,6 +135,20 @@ export async function fetchTableData(lat: number, lon: number): Promise<string> 
     }
     let result = response.json();
     console.log("result" + result);
+    return result;
+}
+
+export async function getCoords(query: string = "kochanowskiego%205"){
+    const queryString = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + query +".json&proximity=ip&access_token=" + API_KEY;
+    queryString.replace(/\s/g, '%20');
+    alert(queryString)
+    let response = await fetch( new URL(queryString), {
+        method: 'GET'
+    })
+    if(!response.ok){
+        throw new Error("Error while fetching data drom the API")
+    }
+    let result = response.json();
     return result;
 }
 

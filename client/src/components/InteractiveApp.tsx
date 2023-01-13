@@ -1,12 +1,11 @@
 //@ts-nocheck
 import { MapWithHeatmap } from "./Interactives/Map";
 import { useState, useEffect } from "react";
-import { fetchHeatmapData, fetchTableData, mockData } from "../api/api";
+import { fetchHeatmapData, fetchTableData, getCoords, mockData } from "../api/api";
 import Select from "react-select";
 import { heatmapData, weightData, defaultWeights, defaultCategories } from "../types";
 import { SliderSet } from "./Interactives/SliderSet";
 
-//import "antd/dist/antd.css";
 import {Table} from "antd";
 
 export function InteractiveApp(){
@@ -161,7 +160,11 @@ export function InteractiveApp(){
         }
     }
 
-    
+    useEffect(() => {
+        getCoords().then((response) => {
+            alert(JSON.stringify(response))
+        })
+    }, [])
 
     
 

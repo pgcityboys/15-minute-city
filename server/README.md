@@ -8,7 +8,7 @@ To run server, you have to install all dependencies:
 <br />
 
 ## Running server
-Simply run `server.py` script:
+Go to `source` directory and simply run `server.py` script:
 ### `python server.py`
 <br />
 

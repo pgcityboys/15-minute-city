@@ -133,6 +133,8 @@ export async function fetchTableData(lat: number, lon: number): Promise<string> 
         throw new Error("Error while fetching data drom the API")
     }
     let result = response.json();
+    console.log("result" + result);
     return result;
 }
+
 

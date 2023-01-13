@@ -35,7 +35,7 @@ const MAP_STYLE = 'mapbox://styles/mapbox/streets-v12';
 export function MapWithHeatmap({
     intensity = 1,
     threshold = 0.03,
-    radiusPixels = 200,
+    radiusPixels = 110,
     mapStyle = MAP_STYLE,
     data = testData
     }){

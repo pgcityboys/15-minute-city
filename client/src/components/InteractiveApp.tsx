@@ -58,8 +58,25 @@ export function InteractiveApp(){
         "sklepy": 1
     }
 
-     const defaultLat = 54.4;
-     const defaultLon = 18.6;
+
+    const defaultLat = 54.4;
+    const defaultLon = 18.6;
+
+   let tableData;
+
+   const getTableData = () => {
+    fetchTableData(defaultLat,defaultLon).then((response) => {
+        console.log("res" + response);
+        tableData = response as tableData;
+        console.log(tableData);
+    })
+}
+        
+     getTableData();
+     
+        
+
+     
     
      const columns = [
         {
@@ -96,7 +113,8 @@ export function InteractiveApp(){
 
     for (let index =0; index < 13; index++){  
         let nestedDataSource = [];
-        let places = mockData.places[categories[index]]
+        console.log(tableData);
+        let places = tableData.places[categories[index]]
         for(let i = 0; i < places.length; i++)
         {
             let name = places[i][3];
@@ -119,6 +137,7 @@ export function InteractiveApp(){
 
     let[category, setCategory] = useState(options[0]);
 
+    
 
     let [heatData, setHeatData] = useState([]);
 
@@ -134,20 +153,15 @@ export function InteractiveApp(){
         })
     }
 
+    
+
     const handleSliderChange = () => {
         if(category !== options[4]){
             setCategory(options[4]);
         }
     }
 
-    const getTableData = () => {
-        fetchTableData(defaultLat,defaultLon).then((response) => {
-            alert(response);
-            let res = JSON.parse(response) as tableData;
-            
-        }
-        )     
-    }
+    
 
     
 
@@ -166,7 +180,7 @@ export function InteractiveApp(){
             />
 
             
-            <div className="MapPart">
+            <div className="MapPart">-
             <MapWithHeatmap
             options={options} 
             color={"#116466"}

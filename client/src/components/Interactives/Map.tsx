@@ -53,7 +53,7 @@ export function MapWithHeatmap({
         threshold,
         aggregation: 'MEAN',
         colorRange: COLOR_SCHEME,
-        debounceTimeout: 200000
+        debounceTimeout: 2000000
         })
     ];
 

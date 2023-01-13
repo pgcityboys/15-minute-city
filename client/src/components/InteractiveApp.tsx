@@ -53,8 +53,8 @@ export function InteractiveApp(){
       }, [category]);
 
 
-    const getData = () => {
-        fetchHeatmapData(defaultWeights).then((response) => {
+    const getData = (weights: weightData) => {
+        fetchHeatmapData(weights).then((response) => {
             let res = response as heatmapData;
             setHeatData(res);
         })
@@ -84,7 +84,7 @@ export function InteractiveApp(){
             options={options} 
             color={"#116466"}
             data={heatData}/>
-            <SliderSet onValuesModified={handleSliderChange}/>
+            <SliderSet onValuesModified={handleSliderChange} onFormSubmitted={getData}/>
             </div>
         </div>
     )

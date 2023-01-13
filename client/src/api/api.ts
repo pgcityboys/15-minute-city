@@ -13,7 +13,8 @@ const testData: heatmapData = [{coordinates: [18.493331, 54.560836], value: 0.4}
 
 export async function fetchHeatmapData(weights: weightData): Promise<string> {
     let response = await fetch(new URL(API_URL), {
-        method: 'GET',
+        method: 'POST',
+        body: JSON.stringify(weights)
     }
     );
     if(!response.ok){

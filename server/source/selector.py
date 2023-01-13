@@ -8,7 +8,7 @@ import json
 import csv
 
 DB_FILENAME = "city.db"
-RESULTS_FILENAME = "results.json"
+PLACES_FILENAME = "places.json"
 COORDS_FILENAME = "coords_to_pregenerate.csv"
 SOURCE_DIR  = os.path.join(os.path.dirname(os.path.realpath(__file__)), '')
 CATEGORIES = ("edukacja", "zdrowie", "rozrywka", "jedzenie", "sport", "kultura", "dzieci", "kawiarnie", "natura", "biznes", "uslugi", "transport", "sklepy")
@@ -124,22 +124,28 @@ def queryPlacesWithinCategories(center, radius):
     return placesByCategories
 
 def getPrecalculatedPoints(wages = {category: 1.0 for category in CATEGORIES}):
-    results = []
+    placesWithinCategoriesForEachCoord = {}
     try:
-        with open(SOURCE_DIR + RESULTS_FILENAME, 'r') as savedResults:
-            results = json.load(savedResults)
+        with open(SOURCE_DIR + PLACES_FILENAME, 'r') as savedPlaces:
+            placesWithinCategoriesForEachCoord = json.load(savedPlaces)
     except FileNotFoundError:
-        # calculate results
+        # query places
         for coords in PRECALCULATED_COORDS:
             placesWithinCategories = queryPlacesWithinCategories(coords, RADIUS)
-            result = 0.0
-            for category, places in placesWithinCategories.items():
-                if len(places) > 0:
-                    result += wages[category]
-            results.append({"coordinates": coords[::-1], "value": result})
+            placesWithinCategoriesForEachCoord[str(coords)] = placesWithinCategories
 
-        with open(SOURCE_DIR + RESULTS_FILENAME, 'w') as saveResults:
-            json.dump(results, saveResults)
+        with open(SOURCE_DIR + PLACES_FILENAME, 'w') as savePlaces:
+            json.dump(placesWithinCategoriesForEachCoord, savePlaces)
+
+    results = []
+    for coords in PRECALCULATED_COORDS:
+        placesWithinCategories = placesWithinCategoriesForEachCoord[str(coords)]
+        result = 0.0
+        for category, places in placesWithinCategories.items():
+            if len(places) > 0:
+                result += wages[category]
+        results.append({"coordinates": coords[::-1], "value": result})
+        
 
     return results
 

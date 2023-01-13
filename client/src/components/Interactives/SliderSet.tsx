@@ -4,17 +4,21 @@ import { SliderComponent } from "./SliderComponent";
 
 type props = {
     onValuesModified: () => void,
-    onFormSubmitted: (weights: weightData) => void
+    onFormSubmitted: (weights: weightData) => void,
+    categoryData: weightData
 }
 
 export function SliderSet(props: props) {
 
     let [weight, setWeight] = useState(defaultWeights);
 
+    const handleSubmit = () => {
+        props.onFormSubmitted(weight);
+    }
+
     useEffect(() => {
         console.log(weight);
         props.onValuesModified();
-        props.onFormSubmitted(weight);
     }, [weight])
 
     return (
@@ -22,6 +26,9 @@ export function SliderSet(props: props) {
             {weightCategories.map((category) => (
                 <SliderComponent name={category} setter={setWeight} prev={weight} key={category}/>
             ))}
+            <div className="SliderWrapper">
+                <button onClick={handleSubmit}> Confirm </button>
+            </div>
         </div>
     )
 }

@@ -20,7 +20,7 @@ export function SliderSet(props: props) {
     return (
         <div className="Sliders">
             {weightCategories.map((category) => (
-                <SliderComponent name={category} setter={setWeight} prev={weight}/>
+                <SliderComponent name={category} setter={setWeight} prev={weight} key={category}/>
             ))}
         </div>
     )

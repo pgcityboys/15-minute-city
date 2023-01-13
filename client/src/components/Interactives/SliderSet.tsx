@@ -34,7 +34,7 @@ export function SliderSet({onValuesModified, onFormSubmitted, categoryData} : pr
                 <SliderComponent name={category} setter={setWeight} prev={weight} key={category}/>
             ))}
             <div className="SliderWrapper">
-                <button onClick={handleSubmit}> Confirm </button>
+                <button onClick={handleSubmit}> <h4>Potwierdź</h4> </button>
             </div>
         </div>
     )

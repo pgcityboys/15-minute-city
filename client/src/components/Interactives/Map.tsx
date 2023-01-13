@@ -21,8 +21,8 @@ const INITIAL_VIEW_STATE = {
     longitude: 18.620274, 
     latitude: 54.380279,
     zoom: 10.5,
-    maxZoom: 16,
-    minZoom: 9,
+    maxZoom: 11,
+    minZoom: 10,
     pitch: 0,
     bearing: 0
     };
@@ -62,7 +62,7 @@ export function MapWithHeatmap({
 
     return (
         <div className="MapContainer">
-            <div style={{position:'relative', width: '70%', height: '70vh', margin: '2rem'}}>
+            <div style={{position:'relative', width: '100%', height: '90vh', margin: '2rem'}}>
             <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={layers}>
                 <StaticMap reuseMaps={false} mapStyle={mapStyle} mapboxAccessToken={API_KEY}/>
             </DeckGL>

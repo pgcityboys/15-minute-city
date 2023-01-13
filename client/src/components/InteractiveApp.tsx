@@ -152,9 +152,7 @@ export function InteractiveApp(){
     
 
     const handleSliderChange = () => {
-        if(category !== options[4]){
-            setCategory(options[4]);
-        }
+        
     }
     const defaultCoordinates = [defaultLon, defaultLat]
     let [coordinates, setCoordinates] = useState(defaultCoordinates)

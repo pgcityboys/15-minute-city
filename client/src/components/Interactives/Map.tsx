@@ -20,8 +20,9 @@ const testData: heatmapData = [{coordinates: [18.493331, 54.560836], value: 0.4}
 const INITIAL_VIEW_STATE = {
     longitude: 18.620274, 
     latitude: 54.380279,
-    zoom: 11.35,
+    zoom: 10.5,
     maxZoom: 16,
+    minZoom: 9,
     pitch: 0,
     bearing: 0
     };

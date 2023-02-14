@@ -3,11 +3,14 @@ name: ci
 on:
   push:
     branches:
-      - "dev"
+      - "main"
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
     steps:
       -
         name: Checkout
@@ -25,7 +28,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./server/Dockerfile
+          context: "{{defaultContext}}:server"
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/15-minutes-city:latest

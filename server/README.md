@@ -2,6 +2,16 @@
 
 This backend is used as API for retrieving data. It's written with Flask combined with sqlite3 database. 
 
+## Using docker
+You can simply run the backend using [Docker](https://docs.docker.com/).
+Run these commands from `.../server/` directory:
+<br />
+```
+docker build --tag 15-minute-city .
+docker run --publish 3001:5000 15-minute-city
+```
+<br />
+
 ## Preparing environment
 To run server, you have to install all dependencies:
 ### `pip install -r requirements.txt`
